@@ -7,6 +7,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
+// app.get('/', (req, res) => {
+//   res.send('Hello, Express!');
+// });
+
 // Your existing game logic and state variables
 let gameBoard = Array(9).fill(null);
 let players = [];
@@ -21,7 +25,6 @@ io.on('connection', (socket) => {
 
   socket.on('makeMove', ({ row, col, value }) => {
     // Update the game state and broadcast to all players
-    // updateMatrix(row, col, value);
     gameBoard[row][col] = value;
     io.emit('updateGame', gameBoard);
 
